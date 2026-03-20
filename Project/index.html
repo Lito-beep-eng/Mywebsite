@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="Landingpage.css">
+</head>
+
+<body>
+
+   <div class="section1">
+      <div class="nav">
+         <img class="b" src="image/b.png" alt="">
+         <img class="logo" src="image/logo.png"  alt="">
+       
+         <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">ContactUs</a></li>
+            <li><a href="">Online Services</a></li>
+            <li><a href="#section2" id="anouncement">Anouncement</a></li>
+            <li><a href="" id="log">login</a></li>
+             <div class="profile-pic">
+                <img class="profile" src="image/profile.jpg" alt="">
+             </div>
+              <div class="dropdown">
+                        <ul>
+                            <li><p>Change Profile</p></li>
+                            <li><p>Change Password</p></li>
+                            <li><p>Logout</p></li>
+                        </ul>
+               </div>
+         </ul>
+
+      </div>
+      <img class="captain" src="image/Barangaycaptain.png" alt="">
+
+      <!---Loginform--->
+      <div id="Container">
+         <div id="loginform">
+            <form action="login.php" method="post">
+               <h5 class="h5">Login</h5>
+               <input type="text" placeholder="Username" name="username" required><br>
+               <div class="password-box">
+                  <input type="password" placeholder="Password" name="password" required>
+               </div>
+               <button type="submit">Login</button>
+               <p>Don't have an account?<a id="registration">Click here to register</a></p>
+            </form>
+         </div>
+      </div>
+
+   </div>
+   <!---Personal Information--->
+   <div id="registrationcontainer">
+
+      <form action="register.php" method="POST" enctype="multipart/form-data">
+
+         <!-- STEP 1 -->
+         <div class="step">
+            <h6>Personal Information</h6>
+
+            <input type="text" name="firstname" placeholder="First Name" required><br>
+            <input type="text" name="middlename" placeholder="Middle Name"><br>
+            <input type="text" name="lastname" placeholder="Last Name" required><br>
+            <input type="text" name="suffix" placeholder="Suffix/optional"><br>
+
+            <select name="gender" required>
+               <option value="">Gender</option>
+               <option>Male</option>
+               <option>Female</option>
+            </select><br>
+
+            <input type="date" name="birthdate" required><br>
+            <input type="text" name="birthplace" placeholder="Birthplace" required><br>
+
+            <select name="civilstatus" required>
+               <option value="">Civil Status</option>
+               <option>Single</option>
+               <option>Married</option>
+            </select><br>
+
+            <input type="text" name="nationality" placeholder="Nationality" required><br>
+
+            <button type="button" onclick="nextStep()">Next</button>
+         </div>
+
+         <!-- STEP 2-->
+         <div class="step">
+            <h6>Address</h6>
+
+            <input type="text" name="house_no" placeholder="House No." required><br>
+            <input type="text" name="street" placeholder="Street" required><br>
+            <input type="text" name="purok" placeholder="Purok / Sitio" required><br>
+            <input type="number" name="years_residency" placeholder="Years of Residency" required><br>
+
+            <button type="button" onclick="prevStep()">Previous</button>
+            <button type="button" onclick="nextStep()">Next</button>
+         </div>
+
+
+         <!-- STEP 3 -->
+         <div class="step">
+            <h6>Household</h6>
+
+            <input type="text" name="head_family" placeholder="Head of Family" required><br>
+            <input type="text" name="relationship" placeholder="Relationship to Head" required><br>
+            <input type="number" name="household_size" placeholder="Household Size" required><br>
+
+            <button type="button" onclick="prevStep()">Previous</button>
+            <button type="button" onclick="nextStep()">Next</button>
+         </div>
+
+
+         <!-- STEP 4 -->
+         <div class="step">
+            <h6>Work / Education</h6>
+
+            <input type="text" name="occupation" placeholder="Occupation" required><br>
+            <input type="text" name="employer" placeholder="Employer"><br>
+
+            <select name="education" required>
+               <option value="">Educational Attainment</option>
+               <option>Elementary</option>
+               <option>High School</option>
+               <option>College</option>
+            </select><br>
+
+            <button type="button" onclick="prevStep()">Previous</button>
+            <button type="button" onclick="nextStep()">Next</button>
+         </div>
+
+
+         <!-- STEP 5 -->
+         <div class="step">
+            <h6>Verification</h6>
+
+            <select name="id_type" required>
+               <option value="">Valid ID Type</option>
+               <option>National ID</option>
+               <option>Driver's License</option>
+               <option>Passport</option>
+            </select><br>
+
+            <input type="text" name="id_number" placeholder="ID Number" required><br>
+
+            <label>ID Image:</label><br>
+            <input type="file" name="id_image" accept="image/*" required><br>
+
+            <label>2x2 Photo:</label><br>
+            <input type="file" name="photo" accept="image/*" required><br>
+
+            <button type="button" onclick="prevStep()">Previous</button>
+            <button type="button" onclick="nextStep()">Next</button>
+         </div>
+
+
+         <!-- STEP 6 -->
+         <div class="step">
+            <h6> Account & Contact Information</h6>
+            <input type="tel" name="mobile" placeholder="Mobile Number" required><br>
+            <input type="email" name="email" placeholder="Email Address" required><br>
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+            <button type="button" onclick="prevStep()">Previous</button>
+            <button type="submit" name="submit">Register</button>
+         </div>
+
+      </form>
+
+   </div>
+   <!--section About-->
+   <div class="section2" id="section2">
+      <h3>Anouncement</h3>
+   </div>
+   <!--Section Services-->
+   <div class="section3">
+      <h1 class="serviceh1">Services</h1>
+      <div class="services">
+          
+            <div class="doc">
+                 <h4>Baranggay Document</h4>
+                 <ul>
+                  <li>Baranggay Certificate of Indigency</li><br>
+                  <li>Baranggay Clearance</li><br>
+                  <li>Solo Parent Certification</li><br>
+                  <li>Certificate of Cohabitation</li><br>
+                  <li>First Time Job-Seeker Certification</li><br>
+                  <li>Baranggay Birth Certificate</li>
+                 </ul>
+            </div>
+            <div class="bookingfacilities">
+               <h4>Booking Facilities</h4>
+               <ul>
+                  <li>Baranggay Hall</li><br>
+                  <li>Multi-Purpose Hall</li><br>
+                  <li>Covered Court</li><br>
+                  <li>Open Space</li><br>
+               </ul>
+
+            </div>
+            <div class="requirements">
+               <h4>Requirements To Avail the Services</h4>
+               <ul>
+                  <li>Valid ID</li><br>
+                  <li>Old Baranggay Clearance</li>
+                   
+               </ul>
+            </div>
+            <button class="bt">Avail Now</button>
+      </div>
+      </div>
+     <!--copyright-->
+      <div class="sec">
+          <p>Copyright&copy;2026 Your Company. All rights reserved.</p>
+      </div>
+    
+         <!--Section ContactUs-->
+      <footer class="footer">
+         <h2>Contact Us</h2>
+         
+      </footer>
+<script src="LandingPage.js"></script>
+</body>
+
+
+</html>
