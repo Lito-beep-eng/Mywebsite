@@ -10,8 +10,14 @@ if (isAuthenticated()) {
 }
 
 $error = '';
+$success = '';
 $username = '';
 $remember = false;
+
+// Check for logout success
+if (isset($_GET['logout']) && $_GET['logout'] === 'success') {
+    $success = 'You have been logged out successfully.';
+}
 
 if (isset($_COOKIE['remembered_username'])) {
     $username = sanitizeInput($_COOKIE['remembered_username']);
@@ -70,104 +76,131 @@ $csrf_token = generateCSRFToken();
     <meta name="description" content="Login to <?php echo APP_NAME; ?>">
     <title>Login - <?php echo APP_NAME; ?></title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #18511f 0%, #0c3f16 100%);
+            background: linear-gradient(135deg, #2c5a2d 0%, #1e4e22 100%);
             color: #f8f8f8;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
         .login-container {
-            width: min(400px, 95%);
-            background: rgba(255, 255, 255, 0.95);
+            width: min(420px, 95%);
+            background: white;
             color: #1b441f;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            border-radius: 14px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0,0,0,0.06);
         }
-
         .login-container h1 {
-            margin: 0 0 24px;
-            font-size: 1.5rem;
+            margin: 0 0 28px;
+            font-size: 26px;
             color: #1e4e22;
             text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
             font-weight: 600;
         }
-
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e4e22;
+            font-size: 14px;
+        }
         .form-group input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #b6d8a9;
-            border-radius: 6px;
-            font-size: 0.95rem;
+            padding: 12px 14px;
+            border: 1.5px solid #d0d0d0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
-
         .form-group input:focus {
             outline: none;
             border-color: #3e8f15;
-            box-shadow: 0 0 8px rgba(62, 143, 21, 0.3);
+            box-shadow: 0 0 0 3px rgba(62,143,21,0.1);
         }
-
         button {
             width: 100%;
-            padding: 10px;
-            margin-top: 16px;
+            padding: 12px;
+            margin-top: 24px;
             border: none;
-            border-radius: 6px;
-            background: linear-gradient(120deg, #3e8f15, #74bf33);
+            border-radius: 8px;
+            background: linear-gradient(135deg, #3e8f15 0%, #2d6610 100%);
             color: white;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
+            font-size: 15px;
         }
-
         button:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(62,143,21,0.3);
         }
-
         .error-message {
-            background: #ffeded;
-            color: #9b1e2e;
-            border: 1px solid #e1a5a5;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 16px;
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             text-align: center;
+            font-size: 14px;
+        }
+        .success-message {
+            background: #efe;
+            color: #263;
+            border: 1px solid #cec;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
         }
 
         .checkbox-group {
             display: flex;
             align-items: center;
-            margin: 12px 0;
+            margin: 20px 0;
+            gap: 8px;
         }
 
         .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin: 0 8px 0 0;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #3e8f15;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 14px;
+            cursor: pointer;
+            color: #555;
+            font-weight: 500;
         }
 
         .form-footer {
-            margin-top: 16px;
+            margin-top: 24px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
 
         .form-footer a {
-            color: #105b0f;
+            color: #3e8f15;
             font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            color: #2d6610;
         }
 
         @media (max-width: 480px) {
@@ -185,6 +218,10 @@ $csrf_token = generateCSRFToken();
     <div class="login-container">
         <h1><?php echo APP_NAME; ?> Login</h1>
         
+        <?php if ($success): ?>
+            <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
+        <?php endif; ?>
+
         <?php if ($error): ?>
             <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>

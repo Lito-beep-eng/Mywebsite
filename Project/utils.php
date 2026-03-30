@@ -67,10 +67,22 @@ function isAuthenticated() {
 
 function getCurrentUser() {
     if (!isAuthenticated()) return null;
-    return [
-        'username' => sanitizeInput($_SESSION['username']),
-        'role' => $_SESSION['role'] ?? ROLE_USER
-    ];
+    
+    global $pdo;
+    
+    try {
+        $stmt = $pdo->prepare("SELECT id, username, fullname, email, phone, address, birthdate, gender, role FROM users WHERE username = ?");
+        $stmt->execute([$_SESSION['username']]);
+        $user = $stmt->fetch();
+        
+        if ($user) {
+            return $user;
+        }
+    } catch (PDOException $e) {
+        logError("Error fetching user: " . $e->getMessage());
+    }
+    
+    return null;
 }
 
 function getRoleDisplayName($role) {

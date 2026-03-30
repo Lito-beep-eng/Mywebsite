@@ -141,51 +141,57 @@ $csrf_token = generateCSRFToken();
     <title>Register - <?php echo APP_NAME; ?></title>
     <link rel="stylesheet" href="css/style.css" />
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            padding-top: 80px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(135deg, #2c5a2d 0%, #1e4e22 100%);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 20px;
         }
 
         .register-container {
-            width: min(500px, 95%);
-            background: rgba(255, 255, 255, 0.95);
+            width: min(520px, 95%);
+            background: white;
             color: #1b441f;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-            margin: 20px;
+            border-radius: 14px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0,0,0,0.06);
         }
 
         .register-container h1 {
-            margin: 0 0 24px;
-            font-size: 1.6rem;
+            margin: 0 0 28px;
+            font-size: 26px;
             color: #1e4e22;
             text-align: center;
+            font-weight: 600;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-weight: 600;
-            color: #1b441f;
+            color: #1e4e22;
+            font-size: 14px;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #b6d8a9;
-            border-radius: 6px;
-            font-size: 0.95rem;
+            padding: 12px 14px;
+            border: 1.5px solid #d0d0d0;
+            border-radius: 8px;
+            font-size: 14px;
             font-family: inherit;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
@@ -193,16 +199,16 @@ $csrf_token = generateCSRFToken();
         .form-group textarea:focus {
             outline: none;
             border-color: #3e8f15;
-            box-shadow: 0 0 8px rgba(62, 143, 21, 0.3);
+            box-shadow: 0 0 0 3px rgba(62,143,21,0.1);
         }
 
         .error-message {
-            background: #ffeded;
-            color: #9b1e2e;
-            border: 1px solid #e1a5a5;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 16px;
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         .error-list {
@@ -211,74 +217,105 @@ $csrf_token = generateCSRFToken();
         }
 
         .error-list li {
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            font-size: 14px;
         }
 
         .success-message {
-            background: #e1f5e1;
-            color: #1e4e22;
-            border: 1px solid #a5e1a5;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 16px;
+            background: #efe;
+            color: #263;
+            border: 1px solid #cec;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             text-align: center;
+        }
+
+        .success-message p {
+            margin: 8px 0;
+            font-size: 14px;
         }
 
         .button-group {
             display: flex;
             gap: 12px;
-            margin-top: 20px;
+            margin-top: 24px;
         }
 
         .button-group button,
         .button-group a {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
             text-align: center;
-            transition: 0.2s;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            text-decoration: none;
         }
 
         .button-group button[type="submit"] {
-            background: linear-gradient(120deg, #3e8f15, #74bf33);
+            background: linear-gradient(135deg, #3e8f15 0%, #2d6610 100%);
             color: white;
         }
 
         .button-group button[type="submit"]:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(62,143,21,0.3);
         }
 
         .form-footer {
-            margin-top: 16px;
+            margin-top: 20px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
 
         .form-footer a {
-            color: #105b0f;
+            color: #3e8f15;
             font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            color: #2d6610;
         }
 
         .success-message a {
             display: inline-block;
-            background: linear-gradient(120deg, #3e8f15, #74bf33);
+            background: linear-gradient(135deg, #3e8f15 0%, #2d6610 100%);
             color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 10px 24px;
+            border-radius: 8px;
             text-decoration: none;
-            margin-top: 12px;
+            margin-top: 16px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .success-message a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(62,143,21,0.3);
         }
 
         @media (max-width: 640px) {
             .register-container {
-                padding: 20px;
+                padding: 30px 20px;
             }
 
             .register-container h1 {
-                font-size: 1.3rem;
+                font-size: 22px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button-group button,
+            .button-group a {
+                width: 100%;
             }
         }
     </style>

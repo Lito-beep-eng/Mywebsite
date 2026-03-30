@@ -22,6 +22,7 @@ $username = $isLoggedIn ? htmlspecialchars($_SESSION['username']) : null;
                 <li><a href="index.php">Home</a></li>
                 <li><a href="index.php#section2">Announcement</a></li>
                 <li><a href="index.php#section3">Online Services</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <?php if ($isLoggedIn): ?>
                     <li><a href="dashboard.php">Dashboard</a></li>
                     <li><a href="logout.php">Logout (<?php echo $username; ?>)</a></li>
@@ -56,25 +57,47 @@ $username = $isLoggedIn ? htmlspecialchars($_SESSION['username']) : null;
                     <li>Certificate of Indigency</li>
                     <li>Barangay Clearance</li>
                     <li>Solo Parent Certification</li>
+                    <li>Birth Certificate</li>
                 </ul>
+                <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">
+                    <?php if ($isLoggedIn): ?>
+                        <a href="request.php" style="color: #3e8f15; text-decoration: underline;">Request now →</a>
+                    <?php else: ?>
+                        <a href="login.php" style="color: #3e8f15; text-decoration: underline;">Login to request →</a>
+                    <?php endif; ?>
+                </p>
             </div>
             <div class="bookingfacilities">
                 <h4>Booking Facilities</h4>
                 <ul>
-                    <li>Barangay Hall</li>
-                    <li>Multi-Purpose Hall</li>
-                    <li>Covered Court</li>
+                    <li>Basketball Court</li>
+                    <li>Multipurpose Hall</li>
+                    <li>Sound System</li>
+                    <li>Barangay Vehicle</li>
                 </ul>
+                <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">
+                    <?php if ($isLoggedIn): ?>
+                        <a href="booking.php" style="color: #3e8f15; text-decoration: underline;">Book now →</a>
+                    <?php else: ?>
+                        <a href="login.php" style="color: #3e8f15; text-decoration: underline;">Login to book →</a>
+                    <?php endif; ?>
+                </p>
             </div>
             <div class="requirements">
                 <h4>Requirements</h4>
                 <ul>
                     <li>Valid ID</li>
-                    <li>Old Barangay Clearance</li>
+                    <li>Complete Name & Address</li>
+                    <li>Valid Contact Number</li>
                 </ul>
             </div>
         </div>
-        <a class="bt" href="services.php">Submit a Service Request</a>
+        <?php if ($isLoggedIn): ?>
+            <a class="bt" href="request.php">Request Certificate</a>
+            <a class="bt" href="booking.php">Book Facility</a>
+        <?php else: ?>
+            <a class="bt" href="login.php">Login to Access Services</a>
+        <?php endif; ?>
     </section>
 
     <section class="sec">
@@ -83,7 +106,8 @@ $username = $isLoggedIn ? htmlspecialchars($_SESSION['username']) : null;
 
     <footer class="footer">
         <h2>Contact Us</h2>
-        <p>Email: brgy.sanjuan@example.com | Phone: +63 912 345 6789</p>
+        <p>Email: brgy.sanjuan@example.com | Phone: 0998 220 5844</p>
+        <p>Address: 1920 Tanchoco Ave, Taytay, 1920 Metro Manila</p>
         <p><a href="contact.php" style="color:#fff; text-decoration:underline;">Send a message</a></p>
     </footer>
 </body>

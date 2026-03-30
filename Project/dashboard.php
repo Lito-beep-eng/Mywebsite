@@ -9,94 +9,99 @@ if (!isAuthenticated()) {
     redirect('login.php');
 }
 
-if (time() - ($_SESSION['login_time'] ?? 0) > SESSION_TIMEOUT) {
-    session_destroy();
-    redirect('login.php?session_expired=1');
-}
-
 $user = getCurrentUser();
-$username = htmlspecialchars($user['username']);
-$role = htmlspecialchars($user['role']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - <?php echo APP_NAME; ?></title>
-    <link rel="stylesheet" href="css/style.css" />
     <style>
-        body { padding-top: 80px; }
-        .dashboard { width: min(1200px, 94%); margin: 40px auto; padding: 0 20px; }
-        .header { background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 30px; margin-bottom: 30px; }
-        .header h1 { margin: 0 0 10px; }
-        .header p { margin: 10px 0; opacity: 0.9; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
-        .card { background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 20px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.2); transition: 0.3s; }
-        .card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.15); }
-        .card h3 { margin: 0 0 10px; }
-        .card a { display: inline-block; margin-top: 12px; padding: 8px 16px; background: linear-gradient(120deg, #3e8f15, #74bf33); color: white; border-radius: 6px; font-weight: 600; transition: 0.2s; }
-        .card a:hover { opacity: 0.9; }
-        @media (max-width: 768px) { .cards { grid-template-columns: 1fr; } }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #f8f9fa; padding: 20px; }
+        .nav { background: linear-gradient(135deg, #2c5a2d 0%, #1e4e22 100%); padding: 16px 24px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+        .nav h2 { margin: 0; font-size: 20px; font-weight: 600; }
+        .nav a { color: rgba(255,255,255,0.95); text-decoration: none; margin: 0 12px; font-size: 14px; transition: color 0.3s ease; }
+        .nav a:hover { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .header { background: white; padding: 32px; border-radius: 12px; margin-bottom: 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05); }
+        .header h1 { color: #1e4e22; margin-bottom: 8px; font-size: 28px; font-weight: 600; }
+        .header p { color: #6c757d; margin: 0; font-size: 15px; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 24px; text-align: center; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(0,0,0,0.05); }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .card h3 { color: #1e4e22; margin-bottom: 10px; font-size: 18px; font-weight: 600; }
+        .card a { display: inline-block; margin-top: 16px; padding: 10px 20px; background: linear-gradient(135deg, #3e8f15 0%, #2d6610 100%); color: white; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 600; transition: all 0.3s ease; }
+        .card a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(62,143,21,0.3); }
+        .admin { background: linear-gradient(135deg, #f0f8ec 0%, #e8f5e3 100%); border-left: 4px solid #3e8f15; }
+        .footer { text-align: center; margin-top: 40px; color: #9ca3af; font-size: 13px; }
     </style>
 </head>
 <body>
-    <header class="nav">
-        <div class="brand">
-            <img src="image/b.png" alt="<?php echo APP_NAME; ?>" style="height: 48px;">
-            <img src="image/logo.png" alt="Logo" style="height: 48px;">
+    <div class="nav">
+        <h2><?php echo APP_NAME; ?></h2>
+        <div>
+            <a href="index.php">Home</a>
+            <a href="logout.php">Logout</a>
         </div>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="logout.php" class="btn-login">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+    </div>
 
-    <main class="dashboard">
+    <div class="container">
         <div class="header">
-            <h1>Welcome, <?php echo $username; ?>!</h1>
-            <p>Role: <strong><?php echo getRoleDisplayName($role); ?></strong></p>
+            <h1>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h1>
+            <p>Role: <strong><?php echo ucfirst($user['role']); ?></strong></p>
         </div>
 
         <div class="cards">
             <div class="card">
-                <h3>📄 Documents</h3>
-                <p>Request barangay certificates</p>
-                <a href="#">Request</a>
+                <h3>📄 Request Certificate</h3>
+                <p style="font-size: 13px; color: #666; margin: 8px 0;">Submit Indigency, Clearance, etc.</p>
+                <a href="request.php">Request</a>
             </div>
+
             <div class="card">
-                <h3>🏛️ Facilities</h3>
-                <p>Book barangay facilities</p>
-                <a href="#">Book</a>
+                <h3>🏛️ Book Facility</h3>
+                <p style="font-size: 13px; color: #666; margin: 8px 0;">Book court, hall, vehicle</p>
+                <a href="booking.php">Book Now</a>
             </div>
+
             <div class="card">
-                <h3>📋 Requests</h3>
-                <p>View your requests</p>
-                <a href="#">View</a>
+                <h3>📋 My Requests</h3>
+                <p style="font-size: 13px; color: #666; margin: 8px 0;">Track certificate status</p>
+                <a href="view_requests.php">View</a>
             </div>
+
             <div class="card">
-                <h3>👤 Profile</h3>
-                <p>Update account info</p>
-                <a href="#">Edit</a>
+                <h3>📅 My Bookings</h3>
+                <p style="font-size: 13px; color: #666; margin: 8px 0;">Track booking status</p>
+                <a href="view_bookings.php">View</a>
             </div>
-            <div class="card">
-                <h3>🔐 Security</h3>
-                <p>Change password</p>
-                <a href="#">Change</a>
+
+            <?php if (in_array($user['role'], ['admin', 'staff'])): ?>
+            <div class="card admin">
+                <h3>⚙️ Requests</h3>
+                <p style="font-size: 13px; color: #666; margin: 8px 0;">Manage requests</p>
+                <a href="admin_requests.php">Manage</a>
             </div>
+
+            <div class="card admin">
+                <h3>⚙️ Bookings</h3>
+                <p style="font-size: 13px; color: #666; margin: 8px 0;">Manage bookings</p>
+                <a href="admin_bookings.php">Manage</a>
+            </div>
+            <?php endif; ?>
+
             <div class="card">
                 <h3>🚪 Sign Out</h3>
-                <p>Logout from account</p>
-                <a href="logout.php" style="background: #d62e2e;">Logout</a>
+                <p style="font-size: 13px; color: #666; margin: 8px 0;">Logout account</p>
+                <a href="logout.php" style="background: #dc3545;">Logout</a>
             </div>
         </div>
-    </main>
 
-    <footer class="footer">
-        <p>&copy; 2026 <?php echo APP_NAME; ?>. All rights reserved.</p>
-    </footer>
+        <div class="footer">
+            <p>&copy; 2026 <?php echo APP_NAME; ?>. All rights reserved.</p>
+        </div>
+    </div>
 </body>
 </html>

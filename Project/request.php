@@ -12,26 +12,30 @@ if (!isAuthenticated()) {
 $user = getCurrentUser();
 $success = '';
 $error = '';
+$cert_types = ['Certificate of Indigency', 'Barangay Clearance', 'Solo Parent Certification', 'Birth Certificate'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCSRFToken($_POST['csrf_token'] ?? '')) {
         $error = 'Security validation failed.';
     } else {
-        $service_type = trim($_POST['service_type'] ?? '');
-        $detail = sanitizeInput($_POST['detail'] ?? '');
+        $cert_type = trim($_POST['certificate_type'] ?? '');
+        $purpose = sanitizeInput($_POST['purpose'] ?? '');
 
-        if (empty($service_type) || empty($detail)) {
-            $error = 'Please select a service and provide details.';
+        if (empty($cert_type) || empty($purpose)) {
+            $error = 'All fields are required.';
+        } elseif (!in_array($cert_type, $cert_types)) {
+            $error = 'Invalid certificate type.';
         } else {
             try {
-                $sql = "INSERT INTO service_requests (username, service_type, details, status) VALUES (?, ?, ?, 'pending')";
+                $sql = "INSERT INTO certificate_requests (user_id, username, certificate_type, fullname, purpose, status) 
+                        VALUES (?, ?, ?, ?, ?, 'pending')";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([$user['username'], $service_type, $detail]);
-                $success = 'Your request has been submitted successfully!';
+                $stmt->execute([$user['id'], $user['username'], $cert_type, $user['fullname'], $purpose]);
+                $success = 'Request submitted successfully!';
                 $_POST = [];
             } catch (PDOException $e) {
                 $error = 'Failed to submit. Try again.';
-                logError("Service request: " . $e->getMessage());
+                logError("Cert request: " . $e->getMessage());
             }
         }
     }
@@ -44,7 +48,7 @@ $csrf_token = generateCSRFToken();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Request - <?php echo APP_NAME; ?></title>
+    <title>Request Certificate - <?php echo APP_NAME; ?></title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #f8f9fa; padding: 20px; }
@@ -63,6 +67,9 @@ $csrf_token = generateCSRFToken();
         button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(62,143,21,0.3); }
         .success { background: #efe; color: #263; padding: 14px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #cec; }
         .error { background: #fee; color: #c33; padding: 14px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #fcc; }
+        .info { background: #eef; color: #036; padding: 14px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ccf; font-size: 14px; }
+        .user-info { background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e9ecef; }
+        .user-info p { margin: 8px 0; font-size: 14px; color: #555; }
         .links { text-align: center; margin-top: 24px; }
         .links a { color: #3e8f15; text-decoration: none; margin: 0 12px; font-size: 14px; font-weight: 600; transition: color 0.3s ease; }
         .links a:hover { color: #2d6610; }
@@ -79,7 +86,11 @@ $csrf_token = generateCSRFToken();
     </div>
 
     <div class="container">
-        <h1>Submit Service Request</h1>
+        <h1>Request Certificate</h1>
+
+        <div class="user-info">
+            <p><strong>Name:</strong> <?php echo htmlspecialchars($user['fullname']); ?></p>
+        </div>
 
         <?php if ($success): ?>
             <div class="success">✓ <?php echo htmlspecialchars($success); ?></div>
@@ -89,22 +100,24 @@ $csrf_token = generateCSRFToken();
             <div class="error">✗ <?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
+        <div class="info">
+            <strong>Note:</strong> Your request will be reviewed by barangay staff. Processing usually takes 2-3 business days.
+        </div>
+
         <form method="POST">
             <div class="form-group">
-                <label>Service Type *</label>
-                <select name="service_type" required>
+                <label>Certificate Type *</label>
+                <select name="certificate_type" required>
                     <option value="">-- Select --</option>
-                    <option value="Barangay Clearance">Barangay Clearance</option>
-                    <option value="Certificate of Indigency">Certificate of Indigency</option>
-                    <option value="Solo Parent Certification">Solo Parent Certification</option>
-                    <option value="Birth Certificate">Birth Certificate</option>
-                    <option value="Facility Booking">Facility Booking</option>
+                    <?php foreach ($cert_types as $type): ?>
+                        <option value="<?php echo htmlspecialchars($type); ?>"><?php echo htmlspecialchars($type); ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Details *</label>
-                <textarea name="detail" required placeholder="Describe your request..."></textarea>
+                <label>Purpose/Details *</label>
+                <textarea name="purpose" required placeholder="Why do you need this certificate?"></textarea>
             </div>
 
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
@@ -112,13 +125,9 @@ $csrf_token = generateCSRFToken();
         </form>
 
         <div class="links">
-            <a href="request.php">Request Certificate</a>
+            <a href="view_requests.php">View My Requests</a>
             <a href="booking.php">Book Facility</a>
-            <a href="dashboard.php">Dashboard</a>
         </div>
-    </div>
-</body>
-</html>
     </div>
 </body>
 </html>
