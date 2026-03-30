@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
     height: 100%;
     overflow: hidden;
@@ -645,4 +646,653 @@ footer {
 .bt:hover{
    
     background-color: rgb(99, 165, 5);
+=======
+html {
+    height: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+     font-family: 'Franklin Gothic Heavy';
+}
+
+body {
+    height: 90vh;
+    margin: 0;
+    background: rgb(24, 81, 31);
+    align-items: center;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    overflow-x: hidden;
+}
+.profile-pic {
+    position: absolute;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    top: 16px;
+    margin-left: 666px;
+   
+}
+.profile-pic img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+   
+}
+.dropdown{
+    display: none;
+    padding-top: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.dropdown .show{
+    display: block;
+}
+.dropdown p{
+    color:rgb(22, 69, 29);
+}
+
+.dropdown li{
+    bottom: 2px;
+    background-color: rgb(206, 206, 206);
+    box-shadow: #6c757d 0px 1px 4px;
+    display: flex;
+    place-items: center;
+    flex-direction: column;
+    font-weight: lighter;
+    font-size: small;
+    cursor: pointer;
+}
+.dropdown li:hover{
+    background-color: rgb(99, 165, 5);
+    color: white;
+}
+.section1,
+.section3,
+.section2 {
+    width: 100%;
+    min-height: 110vh;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.section1::before {
+    top: 80px;
+    content: " ";
+    width: 100%;
+    height: 110%;
+    position: absolute;
+    background: url(image/pic7.png) top center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transform: translateZ(-1px) scale(2.0);
+    filter: blur(1px);
+
+}
+
+.section2 {
+    top: 10px;
+    background: rgb(22, 69, 29);
+    height: 100px;
+    place-content: center;
+    bottom: 50px;
+}
+
+
+.section2.visible {
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
+.text1 {
+    width: 200px;
+    background-color: aqua;
+    top: 5%;
+    left: 17%;
+    position: absolute;
+    font-size: 15vw;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+        5px 5px 70px rgba(255, 255, 255, 0.5);
+}
+
+.text {
+    margin-top: 0;
+    top: 20%;
+    left: 50%;
+    position: absolute;
+    font-family: 'Franklin Gothic Heavy';
+    font-size: 15vw;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+        5px 5px 70px rgba(255, 255, 255, 0.5);
+    transform: scale(1, 1.1) translate(-50%, 5%);
+}
+
+.section3::before {
+    content: "";
+    top: 40px;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url(image/pic6.png) top center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transform: translateZ(-1px) scale(2.0);
+
+}
+
+.logo {
+
+   margin-top: 10px;
+   position: absolute;
+   transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    margin-top: 7%;
+    left: 28%;
+   
+}
+
+.captain {
+    margin-left: 70px;
+    height: 570px;
+    position: absolute;
+    width: 80%;
+    top: 22%;
+    padding-right: 200px;
+    opacity: 0;
+    transform: translateX(40px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.b {
+    position: absolute;
+    transform: translateX(-50%);
+    margin-top: 15%;
+    width: 50%;
+    left: 28%;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+h3 {
+    top: 0;
+    left: 45%;
+    color: aliceblue;
+    transform: translateY(-50%);
+    position: absolute;
+    font-size: 2vw;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+        5px 5px 70px rgba(255, 255, 255, 0.5);
+}
+
+.nav {
+    position: fixed;
+    display: inline-flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: white;
+    font-size: 2vw;
+    font-weight: bolder;
+    text-shadow: 2px 2px 5px rgba(1, 49, 8, 0.3);
+}
+
+li {
+    list-style: none;
+    display: inline-flex;
+    gap: 20px;
+
+}
+
+ul {
+    padding-left: 600px;
+
+}
+
+.nav a {
+    text-decoration: none;
+    padding-left: 20px;
+    font-size: x-large;
+    font-weight:bolder;
+    cursor: pointer;
+    text-shadow: 2px 2px 5px rgba(9, 87, 1, 0.3);
+    margin-top: 13px;
+    color: rgb(1, 58, 12);
+}
+
+.nav a:hover {
+   color: rgb(99, 165, 5);
+}
+
+footer {
+    background: rgb(24, 81, 31);
+    width: 200%;
+
+    height: 379px;
+    position: absolute;
+    transform: translateX(-50%);
+    justify-content: center;
+    place-items: center;
+    top: 1110px;
+}
+
+.sec {
+    width: 200%;
+    height: 150px;
+    background-color: rgb(1, 41, 1);
+    position: absolute;
+    transform: translateY(-50%);
+    z-index: 2;
+    top: 1600px;
+}
+
+/* LOGIN OVERLAY */
+#loginform {
+    display: none;
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    place-content: center;
+    place-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    animation: fadeSlide 0.3s ease;
+}
+
+#loginform.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#loginform input[type="text"] {
+    margin-top: 50px;
+}
+
+#loginform input[type="text"],
+#loginform input[type="password"] {
+    margin-bottom: 20px;
+    width: 380px;
+    ;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+#loginform a {
+    font-size: small;
+    padding-right: 20px;
+}
+
+.h5 {
+    font-size: x-large;
+    position: absolute;
+    top: 0;
+    padding-left: 160px;
+    transform: translateY(-50%);
+    color: rgb(1, 41, 1);
+}
+
+#loginform button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(1, 41, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#loginform button:hover {
+    background-color: rgb(17, 165, 54);
+}
+
+#loginform p {
+    margin-left: 56px;
+}
+
+#loginform a {
+    position: absolute;
+    transform: translateX(-50%);
+    top: 78%;
+    font-size: small;
+    margin-left: 57px;
+    text-decoration: none;
+    text-decoration: underline;
+}
+
+#Container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.6);
+}
+#Container a{
+    position: absolute;
+    transform: translateX(-50%);
+    top: 82%;
+    font-size: x-small;
+    margin-left: 61px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+#Container a:hover{
+    color: rgb(17, 165, 54);
+}
+#Container .h5{
+    font-size: x-large;
+    position: absolute;
+    top: 0;
+    padding-left: 160px;
+    transform: translateY(-50%);
+    color: rgb(1, 41, 1);
+}
+
+
+/* OVERLAY */
+#registrationcontainer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+}
+
+/* STEP CARD */
+#registrationcontainer .step {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    width: 420px;
+    max-width: 95%;
+    min-height: 520px;
+    position: absolute;
+    bottom: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 5px 10px 7px 10px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    animation: fadeSlide 0.3s ease;
+}
+
+/* ACTIVE STEP ONLY */
+#registrationcontainer .step.active {
+    display: flex;
+}
+
+/* TITLE */
+.step h6 {
+    top: 0;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+/* INPUTS */
+.step input,
+.step select {
+    padding: 10px;
+    width: 95%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s ease;
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
+
+.step input:focus,
+.step select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    top: 5px;
+}
+
+/* BUTTONS */
+.step button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s ease;
+    background-color: rgb(1, 58, 12);
+}
+
+.step button:hover {
+    background-color: rgb(17, 165, 54);
+}
+
+/* NEXT BUTTON */
+.step button[onclick="nextStep()"] {
+    color: white;
+
+    .step button[onclick="nextStep()"]:hover {
+        color: rgb(1, 58, 12);
+    }
+}
+
+/* PREVIOUS BUTTON */
+.step button[onclick="prevStep()"] {
+    background: #6c757d;
+    color: white;
+}
+
+.step button[onclick="prevStep()"]:hover {
+    color: rgb(1, 58, 12);
+}
+
+/* SUBMIT BUTTON */
+.step button[type="submit"] {
+    background: #28a745;
+    color: white;
+}
+
+.step button[type="submit"]:hover {
+    background: #1e7e34;
+}
+
+/* FILE INPUT */
+.step input[type="file"] {
+    border: none;
+}
+
+/* ANIMATION */
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    #registrationcontainer .step {
+        width: 90%;
+        padding: 20px;
+    }
+}
+.serviceh1{
+    color: white;
+    font-size: 2vw;
+    font-weight: bolder;
+    text-shadow: 2px 2px 5px rgba(1, 49, 8, 0.3);
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 30px;
+}
+.services{
+    height: 480px;
+    width:1690px;
+    border-radius: 500px;
+    padding: 3px;
+    background-color: rgb(1, 41, 1);
+    display: flex;
+    flex-direction: inline-flex;
+    gap: 70px;
+    place-items: center;
+   
+}
+
+.doc{
+   
+    background-color: rgb(22, 69, 29);
+    display: grid;
+    padding: 20px;
+    place-items: center;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin-left: 200px;
+     transition: transform 0.3s ease;
+}
+.doc:hover{
+    transform: scale(1.05);
+}
+.doc ul{
+    padding-left: 0;
+    top: 10px;
+}
+.doc ul li{
+    list-style: square;
+    bottom:5px;
+    font-size: small;
+    bottom: 20px;
+    color: whitesmoke;
+}
+.doc h4{
+    color: yellowgreen;
+}
+.bookingfacilities{
+    background-color: rgb(22, 69, 29);
+    display: grid;
+    padding: 20px;
+    place-items: center;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+.bookingfacilities:hover{
+    transform: scale(1.05);
+}
+.bookingfacilities h4{
+    color: yellowgreen;
+}
+.bookingfacilities ul{
+    padding-left: 0;
+    top: 10px;
+}
+.bookingfacilities ul li{
+    list-style: square;
+    bottom:5px;
+    font-size: small;
+    bottom: 20px;
+    color: whitesmoke;
+}
+.requirements{
+    background-color: rgb(22, 69, 29);
+    display: grid;
+    padding: 20px;
+    place-items: center;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+.requirements:hover{
+    transform: scale(1.05);
+}
+.requirements ul{
+    padding-left: 0;
+    top: 10px;
+}
+.requirements ul li{
+    list-style: square;
+    font-size: small;
+    bottom:5px;
+    bottom: 20px;
+    color: whitesmoke;
+}
+.requirements h4{
+    margin-bottom: 10px;
+    color: yellowgreen;
+}
+.sec p{
+      color: yellowgreen;
+      font-size: x-large;
+      padding-top: 30px;
+      padding-left: 400px;
+}
+.footer h2{
+
+    color: white;
+    font-size: xx-large;
+    font-weight: 900;
+    padding-left: 1430px;
+}
+.bt{
+     position: absolute;
+    transform: translateX(-50%);
+    top: 56%;
+    left: 90%;
+    padding: 10px 20px;
+    background-color: rgb(0, 75, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.bt:hover{
+   
+    background-color: rgb(99, 165, 5);
+>>>>>>> 3780024 (update)
 }
