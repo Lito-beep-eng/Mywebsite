@@ -1,154 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Barangay San Juan</title>
-   <link rel="stylesheet" href="Landingpage.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Barangay San Juan - Access local government services online">
+    <title>Barangay San Juan - Home</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-   <header class="nav">
-      <div class="brand">
-         <img class="b" src="image/b.png" alt="Barangay Banner">
-         <img class="logo" src="image/logo.png" alt="Barangay Logo">
-      </div>
-
-      <nav>
-         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#section2" id="announcement">Announcement</a></li>
-            <li><a href="#section3">Online Services</a></li>
-            <li><a href="#" id="log">Login</a></li>
-         </ul>
-      </nav>
-
-      <div class="profile-pic" title="Profile menu">
-         <img class="profile" src="image/profile.jpg" alt="User Profile">
-      </div>
-      <div class="dropdown">
-         <ul>
-            <li><p>Change Profile</p></li>
-            <li><p>Change Password</p></li>
-            <li><p>Logout</p></li>
-         </ul>
-      </div>
-   </header>
-
-   <main class="section1">
-      <h1>Welcome to Barangay San Juan</h1>
-      <p>Your local government services in one place.</p>
-      <img class="captain" src="image/Barangaycaptain.png" alt="Barangay Captain">
-   </main>
-
-   <div id="Container" aria-hidden="true">
-      <div id="loginform" role="dialog" aria-modal="true">
-         <button class="close-btn" id="closeLogin" aria-label="Close login form">×</button>
-         <form action="login.php" method="post">
-            <h5>Login</h5>
-            <input type="text" placeholder="Username" name="username" required>
-            <input type="password" placeholder="Password" name="password" required>
-            <button type="submit" name="submit">Login</button>
-            <p>Don't have an account? <a id="registration" href="#">Click here to register</a></p>
-         </form>
-      </div>
-   </div>
-
-   <div id="registrationcontainer" aria-hidden="true">
-      <div class="registration-inner" role="dialog" aria-modal="true">
-         <button class="close-btn" id="closeRegistration" aria-label="Close registration form">×</button>
-         <form action="register.php" method="POST" enctype="multipart/form-data">
-            <h5>Registration</h5>
-            <div class="step">
-               <label>Full Name</label>
-               <input type="text" name="fullname" required>
-               <label>Email</label>
-               <input type="email" name="email" required>
-               <label>Phone Number</label>
-               <input type="tel" name="phone" required>
-            </div>
-
-            <div class="step" style="display: none;">
-               <label>Address</label>
-               <input type="text" name="address" required>
-               <label>Birthdate</label>
-               <input type="date" name="birthdate" required>
-               <label>Gender</label>
-               <select name="gender" required>
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-               </select>
-            </div>
-
-            <div class="step" style="display: none;">
-               <label>Username</label>
-               <input type="text" name="username" required>
-               <label>Password</label>
-               <input type="password" name="password" required>
-               <label>Confirm Password</label>
-               <input type="password" name="confirm_password" required>
-               <label>Upload Profile Image (optional)</label>
-               <input type="file" name="profile_image" accept="image/*">
-            </div>
-
-            <div class="step-actions">
-               <button type="button" id="prevBtn">Previous</button>
-               <button type="button" id="nextBtn">Next</button>
-               <button type="submit" id="submitBtn" style="display: none;">Register</button>
-            </div>
-         </form>
-      </div>
-   </div>
-
-   <section class="section2" id="section2">
-      <h3>Announcement</h3>
-      <p>Check back soon for updates from Barangay San Juan administration.</p>
-   </section>
-
-   <section class="section3" id="section3">
-      <h1 class="serviceh1">Services</h1>
-      <div class="services">
-         <div class="doc">
-            <h4>Barangay Document</h4>
+    <!-- Navigation -->
+    <header class="nav">
+        <div class="brand">
+            <img src="image/b.png" alt="Barangay Banner">
+            <img src="image/logo.png" alt="Logo">
+        </div>
+        <nav class="main-nav">
             <ul>
-               <li>Barangay Certificate of Indigency</li>
-               <li>Barangay Clearance</li>
-               <li>Solo Parent Certification</li>
-               <li>Certificate of Cohabitation</li>
-               <li>First Time Job-Seeker Certification</li>
-               <li>Barangay Birth Certificate</li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#announcements">Announcements</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="login.php" class="btn-login">Login</a></li>
             </ul>
-         </div>
-         <div class="bookingfacilities">
-            <h4>Booking Facilities</h4>
-            <ul>
-               <li>Barangay Hall</li>
-               <li>Multi-Purpose Hall</li>
-               <li>Covered Court</li>
-               <li>Open Space</li>
-            </ul>
-         </div>
-         <div class="requirements">
-            <h4>Requirements To Avail the Services</h4>
-            <ul>
-               <li>Valid ID</li>
-               <li>Old Barangay Clearance</li>
-            </ul>
-         </div>
-      </div>
-      <button class="bt">Avail Now</button>
-   </section>
+        </nav>
+    </header>
 
-   <div class="sec">
-      <p>Copyright &copy; 2026 Barangay San Juan. All rights reserved.</p>
-   </div>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Barangay San Juan</h1>
+                <p class="tagline">Your Local Government Services Online</p>
+                <p class="description">Apply for documents, book facilities, and manage requests</p>
+                <div class="cta-buttons">
+                    <a href="login.php" class="btn btn-primary">Login</a>
+                    <a href="register.php" class="btn btn-secondary">Register</a>
+                </div>
+            </div>
+            <img class="hero-image" src="image/Barangaycaptain.png" alt="Barangay Captain">
+        </section>
 
-   <footer class="footer">
-      <h2>Contact Us</h2>
-      <p>123 Barangay Lane, San Juan</p>
-   </footer>
+        <!-- Announcements Section -->
+        <section class="announcements-section" id="announcements">
+            <div class="section-container">
+                <h2>Latest Announcements</h2>
+                <p class="section-description">Stay updated with news from Barangay San Juan</p>
+                
+                <article class="announcement-card">
+                    <h3>Online Services Now Available</h3>
+                    <p class="meta">March 30, 2026</p>
+                    <p>We are now accepting online service requests for all barangay documents. Register today to get started.</p>
+                </article>
 
-   <script src="LandingPage.js"></script>
+                <article class="announcement-card">
+                    <h3>Facility Booking System</h3>
+                    <p class="meta">March 28, 2026</p>
+                    <p>Book our facilities online for your events and meetings.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-section" id="services">
+            <div class="section-container">
+                <h2>Our Services</h2>
+                <p class="section-description">Available services from Barangay San Juan</p>
+
+                <div class="services-grid">
+                    <article class="service-card">
+                        <h3>Barangay Documents</h3>
+                        <p class="service-description">Official certificates</p>
+                        <ul class="service-list">
+                            <li>Certificate of Indigency</li>
+                            <li>Barangay Clearance</li>
+                            <li>Solo Parent Certification</li>
+                            <li>Birth Certificate</li>
+                        </ul>
+                        <a href="login.php" class="btn btn-primary">Request</a>
+                    </article>
+
+                    <article class="service-card">
+                        <h3>Facility Booking</h3>
+                        <p class="service-description">Community facilities</p>
+                        <ul class="service-list">
+                            <li>Barangay Hall</li>
+                            <li>Multi-Purpose Hall</li>
+                            <li>Covered Court</li>
+                            <li>Open Space</li>
+                        </ul>
+                        <a href="login.php" class="btn btn-primary">Book</a>
+                    </article>
+
+                    <article class="service-card">
+                        <h3>Requirements</h3>
+                        <p class="service-description">Needed documents</p>
+                        <ul class="service-list">
+                            <li>Valid Government ID</li>
+                            <li>Proof of Residency</li>
+                            <li>Supporting Documents</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary">Learn More</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="section-container">
+                <h2>Contact Us</h2>
+                <p class="section-description">Get in touch with Barangay San Juan</p>
+                <div class="contact-info">
+                    <article class="contact-card">
+                        <h3>Address</h3>
+                        <p>123 Barangay Lane<br>San Juan, Metro Manila</p>
+                    </article>
+                    <article class="contact-card">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+63212345678">(02) 1234-5678</a></p>
+                    </article>
+                    <article class="contact-card">
+                        <h3>Hours</h3>
+                        <p>Monday - Friday<br>9:00 AM - 5:00 PM</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Barangay San Juan. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
