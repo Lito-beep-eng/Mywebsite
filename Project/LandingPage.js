@@ -1,132 +1,70 @@
-<<<<<<< HEAD
-
-const showlog = document.getElementById("log"); 
-const log = document.getElementById("loginform");      
+// LOGIN MODAL
+const showlog = document.getElementById("log");
+const loginFormWrapper = document.getElementById("loginform");
 const container = document.getElementById("Container");
 const registrationContainer = document.getElementById("registrationcontainer");
 const showreg = document.getElementById("registration");
+const closeLoginBtn = document.getElementById("closeLogin");
+const closeRegistrationBtn = document.getElementById("closeRegistration");
 let currentStep = 0;
 const steps = document.querySelectorAll(".step");
 
-// LOGIN MODAL
+function openLoginModal() {
+  container.style.display = "flex";
+  loginFormWrapper.style.display = "block";
+  registrationContainer.style.display = "none";
+  document.body.style.overflow = "hidden";
+}
+
+function openRegistrationModal() {
+  registrationContainer.style.display = "flex";
+  container.style.display = "none";
+  loginFormWrapper.style.display = "none";
+  document.body.style.overflow = "hidden";
+  currentStep = 0;
+  showStep(currentStep);
+}
+
+function closeAllModals() {
+  container.style.display = "none";
+  loginFormWrapper.style.display = "none";
+  registrationContainer.style.display = "none";
+  document.body.style.overflow = "auto";
+}
 
 showlog.addEventListener("click", (event) => {
   event.preventDefault();
-
-  container.style.display = "block";
-  log.style.display = "block";
-  registrationContainer.style.display = "none"; // hide registration
-  document.body.style.overflow = "hidden";
+  openLoginModal();
 });
-
-
-
-// REGISTRATION MODAL
 
 showreg.addEventListener("click", (event) => {
   event.preventDefault();
-
-  registrationContainer.style.display = "block";
-  container.style.display = "none"; // hide login
-  log.style.display = "none";
-  document.body.style.overflow = "hidden";
-
-  currentStep = 0;
-  showStep(currentStep);
+  openRegistrationModal();
 });
 
+if (closeLoginBtn) {
+  closeLoginBtn.addEventListener("click", closeAllModals);
+}
+if (closeRegistrationBtn) {
+  closeRegistrationBtn.addEventListener("click", closeAllModals);
+}
 
-
-// STEP FUNCTION
+// Step navigation
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
 
 function showStep(index) {
   steps.forEach((step, i) => {
     step.style.display = (i === index) ? "block" : "none";
   });
+
+  if (prevBtn && nextBtn && submitBtn) {
+    prevBtn.style.display = (index === 0) ? "none" : "inline-flex";
+    nextBtn.style.display = (index === steps.length - 1) ? "none" : "inline-flex";
+    submitBtn.style.display = (index === steps.length - 1) ? "inline-flex" : "none";
+  }
 }
-
-
-
-// VALIDATION FUNCTION
-
-function validateStep(stepIndex) {
-  const inputs = steps[stepIndex].querySelectorAll("input, select");
-  let valid = true;
-
-  const currentYear = new Date().getFullYear();
-
-  inputs.forEach(input => {
-
-    // REQUIRED CHECK
-    if (input.hasAttribute("required") && !input.value.trim()) {
-      input.style.border = "2px solid red";
-      valid = false;
-      return;
-    }
-
-    // BIRTHDATE VALIDATION
-    if (input.name === "birthdate" && input.value) {
-      const selectedYear = new Date(input.value).getFullYear();
-
-      if (selectedYear >= currentYear) {
-        alert("Birth year cannot be the current year or future year.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-    }
-
-    // PASSWORD VALIDATION
-    if (input.name === "password") {
-      const confirmPassword = document.querySelector('input[name="confirm_password"]');
-
-      // Minimum 8 characters
-      if (input.value.length < 8) {
-        alert("Password must be at least 8 characters long.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-
-      // Must contain at least 1 letter and 1 number
-      const strongPassword = /^(?=.*[A-Za-z])(?=.*\d).+$/;
-      if (!strongPassword.test(input.value)) {
-        alert("Password must contain at least one letter and one number.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-
-      // Match check
-      if (confirmPassword && input.value !== confirmPassword.value) {
-        alert("Passwords do not match.");
-        confirmPassword.style.border = "2px solid red";
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-    }
-
-    // CONFIRM PASSWORD VALIDATION
-    if (input.name === "confirm_password") {
-      const password = document.querySelector('input[name="password"]');
-
-      if (password && input.value !== password.value) {
-        alert("Passwords do not match.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-    }
-
-    input.style.border = "1px solid #ccc";
-  });
-
-  return valid;
-}
-
-
-// NEXT BUTTON
 
 function nextStep() {
   if (validateStep(currentStep)) {
@@ -139,10 +77,6 @@ function nextStep() {
   }
 }
 
-
-
-// PREVIOUS BUTTON
-
 function prevStep() {
   if (currentStep > 0) {
     currentStep--;
@@ -150,237 +84,96 @@ function prevStep() {
   }
 }
 
-
-// CLOSE LOGIN and regitration WHEN CLICK OUTSIDE
-
-window.addEventListener("click", (event) => {
-  if (event.target === container) {
-    container.style.display = "none";
-    log.style.display = "none";
-    document.body.style.overflow = "auto";
-  }
-
-  if (event.target === registrationContainer) {
-    registrationContainer.style.display = "none";
-    document.body.style.overflow = "auto";
-    inputs.forEach(input => input.style.border = "1px solid #ccc"); // reset input borders
-  }
-});
-//scrool effect anouncement
-document.getElementById("anouncement").addEventListener("click", (e) => {
-    e.preventDefault();
-    const section = document.getElementById("section2");
-
-   
-    section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-   
-    setTimeout(() => {
-        section.classList.add("visible");
-    }, 2); 
-});
-// PROFILE DROPDOWN
-document.addEventListener("DOMContentLoaded", () => {
-  const profilePic = document.querySelector(".profile-pic");
-  const dropdown = document.querySelector(".dropdown");
-
-  profilePic.addEventListener("click", () => {
-    dropdown.classList.toggle("show");
-  });
-=======
-
-const showlog = document.getElementById("log"); 
-const log = document.getElementById("loginform");      
-const container = document.getElementById("Container");
-const registrationContainer = document.getElementById("registrationcontainer");
-const showreg = document.getElementById("registration");
-let currentStep = 0;
-const steps = document.querySelectorAll(".step");
-
-// LOGIN MODAL
-
-showlog.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  container.style.display = "block";
-  log.style.display = "block";
-  registrationContainer.style.display = "none"; // hide registration
-  document.body.style.overflow = "hidden";
-});
-
-
-
-// REGISTRATION MODAL
-
-showreg.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  registrationContainer.style.display = "block";
-  container.style.display = "none"; // hide login
-  log.style.display = "none";
-  document.body.style.overflow = "hidden";
-
-  currentStep = 0;
-  showStep(currentStep);
-});
-
-
-
-// STEP FUNCTION
-
-function showStep(index) {
-  steps.forEach((step, i) => {
-    step.style.display = (i === index) ? "block" : "none";
-  });
-}
-
-
-
-// VALIDATION FUNCTION
-
+// Validation
 function validateStep(stepIndex) {
   const inputs = steps[stepIndex].querySelectorAll("input, select");
   let valid = true;
 
-  const currentYear = new Date().getFullYear();
-
   inputs.forEach(input => {
-
-    // REQUIRED CHECK
     if (input.hasAttribute("required") && !input.value.trim()) {
       input.style.border = "2px solid red";
       valid = false;
-      return;
+    } else {
+      input.style.border = "1px solid #ccc";
     }
-
-    // BIRTHDATE VALIDATION
-    if (input.name === "birthdate" && input.value) {
-      const selectedYear = new Date(input.value).getFullYear();
-
-      if (selectedYear >= currentYear) {
-        alert("Birth year cannot be the current year or future year.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-    }
-
-    // PASSWORD VALIDATION
-    if (input.name === "password") {
-      const confirmPassword = document.querySelector('input[name="confirm_password"]');
-
-      // Minimum 8 characters
-      if (input.value.length < 8) {
-        alert("Password must be at least 8 characters long.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-
-      // Must contain at least 1 letter and 1 number
-      const strongPassword = /^(?=.*[A-Za-z])(?=.*\d).+$/;
-      if (!strongPassword.test(input.value)) {
-        alert("Password must contain at least one letter and one number.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-
-      // Match check
-      if (confirmPassword && input.value !== confirmPassword.value) {
-        alert("Passwords do not match.");
-        confirmPassword.style.border = "2px solid red";
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-    }
-
-    // CONFIRM PASSWORD VALIDATION
-    if (input.name === "confirm_password") {
-      const password = document.querySelector('input[name="password"]');
-
-      if (password && input.value !== password.value) {
-        alert("Passwords do not match.");
-        input.style.border = "2px solid red";
-        valid = false;
-        return;
-      }
-    }
-
-    input.style.border = "1px solid #ccc";
   });
 
   return valid;
 }
 
-
-// NEXT BUTTON
-
-function nextStep() {
-  if (validateStep(currentStep)) {
-    if (currentStep < steps.length - 1) {
-      currentStep++;
-      showStep(currentStep);
-    }
-  } else {
-    alert("Please fill out all required fields before proceeding.");
-  }
-}
-
-
-
-// PREVIOUS BUTTON
-
-function prevStep() {
-  if (currentStep > 0) {
-    currentStep--;
-    showStep(currentStep);
-  }
-}
-
-
-// CLOSE LOGIN and regitration WHEN CLICK OUTSIDE
-
+// Close modals when clicking outside
 window.addEventListener("click", (event) => {
   if (event.target === container) {
-    container.style.display = "none";
-    log.style.display = "none";
-    document.body.style.overflow = "auto";
+    closeAllModals();
   }
-
   if (event.target === registrationContainer) {
-    registrationContainer.style.display = "none";
-    document.body.style.overflow = "auto";
-    inputs.forEach(input => input.style.border = "1px solid #ccc"); // reset input borders
+    closeAllModals();
   }
 });
-//scrool effect anouncement
-document.getElementById("anouncement").addEventListener("click", (e) => {
+
+// Escape key closes modals
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeAllModals();
+  }
+});
+
+// Announcement scroll effect
+const announcementLink = document.getElementById("announcement");
+if (announcementLink) {
+  announcementLink.addEventListener("click", (e) => {
     e.preventDefault();
     const section = document.getElementById("section2");
-
-   
-    section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-   
-    setTimeout(() => {
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => {
         section.classList.add("visible");
-    }, 2); 
-});
-// PROFILE DROPDOWN
+      }, 500);
+    }
+  });
+}
+
+// Profile dropdown
 document.addEventListener("DOMContentLoaded", () => {
   const profilePic = document.querySelector(".profile-pic");
   const dropdown = document.querySelector(".dropdown");
+  const registrationForm = document.querySelector("#registrationcontainer form");
 
-  profilePic.addEventListener("click", () => {
-    dropdown.classList.toggle("show");
-  });
->>>>>>> 3780024 (update)
+  if (profilePic && dropdown) {
+    profilePic.addEventListener("click", () => {
+      dropdown.classList.toggle("show");
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", nextStep);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", prevStep);
+  }
+
+  if (registrationForm) {
+    registrationForm.addEventListener("submit", (e) => {
+      const password = registrationForm.querySelector("input[name='password']");
+      const confirmPassword = registrationForm.querySelector("input[name='confirm_password']");
+
+      if (password && confirmPassword && password.value !== confirmPassword.value) {
+        e.preventDefault();
+        alert("Passwords do not match. Please check and try again.");
+        password.style.border = "2px solid red";
+        confirmPassword.style.border = "2px solid red";
+        return;
+      }
+
+      if (!validateStep(currentStep)) {
+        e.preventDefault();
+        alert("Please complete all required fields.");
+        return;
+      }
+
+      document.body.style.overflow = "auto";
+      document.getElementById("registrationcontainer").style.display = "none";
+    });
+  }
 });
