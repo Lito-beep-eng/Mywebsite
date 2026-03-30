@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h3 style="color: #1e4e22; font-size: 18px; font-weight: 600; margin-bottom: 16px;">Barangay Office Information</h3>
                 <p style="margin: 12px 0; color: #555; font-size: 15px;"><strong style="color: #1e4e22;">Address:</strong> 1920 Tanchoco Ave, Taytay, 1920 Metro Manila</p>
                 <p style="margin: 12px 0; color: #555; font-size: 15px;"><strong style="color: #1e4e22;">Phone:</strong> 0998 220 5844</p>
-                <p style="margin: 12px 0; color: #555; font-size: 15px;"><strong style="color: #1e4e22;">Email:</strong> brgy.sanjuan@example.com</p>
+                <p style="margin: 12px 0; color: #555; font-size: 15px;"><strong style="color: #1e4e22;">Email:</strong> bsjloveandunity@gmail.com</p>
             </div>
             
             <?php if ($sent): ?><div style="background:#efe;color:#263;padding:14px;border-radius:8px;margin-bottom:20px;border: 1px solid #cec; font-size: 14px;">✓ <?php echo htmlspecialchars($sent); ?></div><?php endif; ?>

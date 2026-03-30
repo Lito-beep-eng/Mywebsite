@@ -57,11 +57,6 @@ try {
         .links a { color: #3e8f15; text-decoration: none; margin: 0 12px; font-size: 14px; font-weight: 600; transition: color 0.3s ease; }
         .links a:hover { color: #2d6610; }
     </style>
-        .empty { background: white; padding: 40px; text-align: center; border-radius: 5px; }
-        .empty a { color: #3e8f15; text-decoration: none; font-weight: bold; }
-        .links { text-align: center; margin-top: 20px; }
-        .links a { color: #3e8f15; text-decoration: none; margin: 0 10px; }
-    </style>
 </head>
 <body>
     <div class="nav">

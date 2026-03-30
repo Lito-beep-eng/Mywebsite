@@ -106,7 +106,7 @@ $username = $isLoggedIn ? htmlspecialchars($_SESSION['username']) : null;
 
     <footer class="footer">
         <h2>Contact Us</h2>
-        <p>Email: brgy.sanjuan@example.com | Phone: 0998 220 5844</p>
+        <p>Email: bsjloveandunity@gmail.com | Phone: 0998 220 5844</p>
         <p>Address: 1920 Tanchoco Ave, Taytay, 1920 Metro Manila</p>
         <p><a href="contact.php" style="color:#fff; text-decoration:underline;">Send a message</a></p>
     </footer>
