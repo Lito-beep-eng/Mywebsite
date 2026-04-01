@@ -268,7 +268,7 @@ $csrf_token = generateCSRFToken();
 
         <div class="form-footer">
             <p>Don't have an account? <a href="register.php">Register here</a></p>
-            <p><a href="index.html">Back to Home</a></p>
+            <p><a href="index.php">Back to Home</a></p>
         </div>
     </div>
 </body>

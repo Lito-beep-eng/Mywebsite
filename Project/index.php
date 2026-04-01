@@ -20,6 +20,7 @@ $username = $isLoggedIn ? htmlspecialchars($_SESSION['username']) : null;
         <nav>
             <ul>
                 <li><a href="index.php">Home</a></li>
+                <li><a href="aboutus.php">About Us</a></li>
                 <li><a href="index.php#section2">Announcement</a></li>
                 <li><a href="index.php#section3">Online Services</a></li>
                 <li><a href="contact.php">Contact</a></li>
